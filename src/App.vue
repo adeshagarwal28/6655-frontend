@@ -1,17 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- Use the component -->
+  <WelcomeHeader/>
+  <!-- Passing data to another component -->
+  <RoomsInfo :rooms="rooms" />
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+//Import the component
+import WelcomeHeader from './components/WelcomeHeader'
+import RoomsInfo from './components/RoomsInfo'
 
 export default {
   name: 'App',
+  //Register all components
   components: {
-    HelloWorld
+    WelcomeHeader,
+    RoomsInfo,
+  },
+  data() {
+    return {
+      rooms: null,
+          }
+        },
+      async created() {
+        try {
+      const response = await fetch('http://localhost:6835/api/hotel');
+      this.hotelData = await response.json();
+      console.log(this.hotelData.rooms);
+      this.rooms=this.hotelData.rooms;
+            } 
+            catch (error) 
+            {
+      console.error('Error fetching hotel data:', error);
+            }
   }
 }
+    
 </script>
 
 <style>
