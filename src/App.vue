@@ -25,7 +25,7 @@ export default {
         },
       async created() {
         try {
-      const response = await fetch('https://hotel-management-adesh-2a438800209b.herokuapp.com/api/hotel');
+      const response = await fetch('https://node-backend-server-f025317f1878.herokuapp.com/api/hotel');
       this.hotelData = await response.json();
       console.log(this.hotelData.rooms);
       this.rooms=this.hotelData.rooms;
